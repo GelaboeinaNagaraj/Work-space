@@ -8,6 +8,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { withStyles } from "@material-ui/core/styles";
 import AvatarRaw from "@material-ui/core/Avatar";
 
+import * as Constants from './constants';
+
 const cardStyles = theme => ({
   root: {
     background: theme.palette.primary.main
@@ -27,7 +29,6 @@ const avatarStyles = theme => ({
   }
 });
 const Avatar = withStyles(avatarStyles)(AvatarRaw);
-
 const styles = {
   card: {
     margin: "5% 25%"
@@ -35,27 +36,32 @@ const styles = {
 };
 
 const NowWhat = props => {
-  const { classes } = props;
+  const { classes, tempData } = props;
+  const { metric, latitude, longitude, timestamp } = tempData;
   return (
     <Card className={classes.card}>
-      <CardHeader title="OK, Nagaraj Yadav, you're all setup. Now What?" />
+      <CardHeader title="Here come dashboard...!!" />
       <CardContent>
         <List>
           <ListItem>
             <Avatar>1</Avatar>
-            <ListItemText primary="Connect to the Drone API" />
+            <ListItemText primary="Temperature:" ></ListItemText>
+            <ListItemText primary={tempData ? metric : ''} ></ListItemText>
           </ListItem>
           <ListItem>
             <Avatar>2</Avatar>
-            <ListItemText primary="Create your Visualization" />
+            <ListItemText primary="Latitude:" />
+            <ListItemText primary={tempData ? latitude : ''} ></ListItemText>
           </ListItem>
           <ListItem>
             <Avatar>3</Avatar>
-            <ListItemText primary="Poll the API" />
+            <ListItemText primary="Longitude:" />
+            <ListItemText primary={tempData ? longitude: ''} ></ListItemText>
           </ListItem>
           <ListItem>
             <Avatar>4</Avatar>
-            <ListItemText primary="Submit Your App" />
+            <ListItemText primary="Last Received:" />
+            <ListItemText primary={ timestamp ? `${Constants.FETCH_INTERVAL} seconds ago` : ''}></ListItemText>
           </ListItem>
         </List>
       </CardContent>
